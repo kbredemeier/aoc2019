@@ -1,18 +1,6 @@
 defmodule AdventOfCode2019 do
   @moduledoc """
-  Documentation for AdventOfCode2019.
+  This project contains the solutions for the Advent of Code challenges from
+  2019.
   """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> AdventOfCode2019.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
 end
