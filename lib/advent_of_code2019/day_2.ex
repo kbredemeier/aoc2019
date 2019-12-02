@@ -61,10 +61,7 @@ defmodule AdventOfCode2019.Day2 do
     {:cont, List.replace_at(program, output_index, value)}
   end
 
-  defp calc_output([99, _, _, _], program), do: {:halt, program}
-  defp calc_output([99, _, _], program), do: {:halt, program}
-  defp calc_output([99, _], program), do: {:halt, program}
-  defp calc_output([99], program), do: {:halt, program}
+  defp calc_output([99 | _], program), do: {:halt, program}
 
   defp read_input_file do
     :aoc2019
