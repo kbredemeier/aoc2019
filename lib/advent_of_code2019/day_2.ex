@@ -13,7 +13,7 @@ defmodule AdventOfCode2019.Day2 do
     combis =
       0..99
       |> Enum.into([])
-      |> combinations(2)
+      |> permutaions(2)
 
     [noun, verb] =
       Enum.find(combis, fn [noun, verb] ->
@@ -28,14 +28,14 @@ defmodule AdventOfCode2019.Day2 do
     100 * noun + verb
   end
 
-  def combinations(list, num)
-  def combinations(_list, 0), do: [[]]
-  def combinations(list = [], _num), do: list
+  def permutaions(list, num)
+  def permutaions(_list, 0), do: [[]]
+  def permutaions(list = [], _num), do: list
 
-  def combinations([head | tail], num) do
+  def permutaions([head | tail], num) do
     result =
-      Enum.map(combinations(tail, num - 1), &[head | &1]) ++
-        combinations(tail, num)
+      Enum.map(permutaions(tail, num - 1), &[head | &1]) ++
+        permutaions(tail, num)
 
     Enum.uniq(result ++ Enum.map(result, &Enum.reverse/1))
   end
