@@ -10,11 +10,35 @@ defmodule AdventOfCode2019.Day3 do
 
     intersections = MapSet.intersection(cab1_coordinates, cab2_coordinates)
 
-    distance_by_length =
-      intersections
-      |> Enum.map(&calc_point_distance({0, 0}, &1))
-      |> Enum.sort()
-      |> Enum.at(1)
+    intersections
+    |> Enum.map(&calc_point_distance({0, 0}, &1))
+    |> Enum.sort()
+    |> Enum.at(1)
+  end
+
+  def part_2 do
+    [cab1_directions, cab2_directions, _] = read_input_file()
+
+    cab1_coordinates =
+      [{0, 0}] |> calculate_path(cab1_directions) |> Enum.reverse()
+
+    cab2_coordinates =
+      [{0, 0}] |> calculate_path(cab2_directions) |> Enum.reverse()
+
+    intersections =
+      MapSet.intersection(
+        MapSet.new(cab1_coordinates),
+        MapSet.new(cab2_coordinates)
+      )
+
+    intersections
+    |> Enum.map(fn coordinates ->
+      cab1_index = Enum.find_index(cab1_coordinates, &(&1 == coordinates))
+      cab2_index = Enum.find_index(cab2_coordinates, &(&1 == coordinates))
+      cab1_index + cab2_index
+    end)
+    |> Enum.sort()
+    |> Enum.at(1)
   end
 
   def calculate_path(path, []), do: path
